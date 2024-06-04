@@ -1,0 +1,2859 @@
+{
+    "appid": "dce19fec-9c3e-4bec-914e-8230ac80a417",
+    "name": "TrackMe",
+    "description": "This application provides powerful capabilities to interact with TrackMe for Splunk Enterprise & Splunk Cloud.",
+    "type": "siem",
+    "product_vendor": "TrackMe Limited",
+    "logo": "trackme.png",
+    "logo_dark": "trackme_dark.png",
+    "product_name": "TrackMe",
+    "python_version": "3",
+    "product_version_regex": ".*",
+    "publisher": "TrackMe Limited",
+    "license": "Copyright (c) TrackMe Limited, 2024",
+    "app_version": "1.0.0",
+    "utctime_updated": "2024-04-12T06:57:35.836924Z",
+    "package_name": "phantom_trackme",
+    "main_module": "trackme_connector.py",
+    "min_phantom_version": "6.0.2",
+    "app_wizard_version": "1.0.0",
+    "configuration": {
+        "splunk_url": {
+            "description": "Splunk API URL",
+            "data_type": "string",
+            "required": true,
+            "value_list": [],
+            "default": "https://mysplunk.mydomain.com:8089",
+            "order": 0,
+            "name": "splunk_url",
+            "id": 0
+        },
+        "splunk_token": {
+            "description": "Splunk bearer token",
+            "data_type": "password",
+            "required": true,
+            "order": 1,
+            "name": "splunk_token",
+            "id": 1
+        },
+        "verify_ssl": {
+            "description": "Verify Splunk API SSL certificate",
+            "data_type": "boolean",
+            "required": true,
+            "default": false,
+            "order": 2,
+            "name": "verify_ssl",
+            "id": 2
+        }
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity using supplied configuration",
+            "verbose": "",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "ack_get",
+            "identifier": "ack_get",
+            "description": "Get Ack status",
+            "verbose": "This action allows retrieving the acknowledgement status for a given TrackMe entity.",
+            "type": "investigate",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "object_category": {
+                    "description": "The object category (splk-dsm, splk-dhm, splk-mhm, splk-cim, splk-flx, splk-wlk)",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "object_category",
+                    "id": 2,
+                    "param_name": "object_category"
+                },
+                "object_list": {
+                    "description": "List of entities, in a comma separated format. Use * to retrieve all objects, defaults to * if not specified",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object_list",
+                    "id": 3,
+                    "param_name": "object_list"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object_category",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object_category",
+                    "column_order": 1,
+                    "example_values": [
+                        "splk-dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object",
+                    "data_type": "string",
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_state",
+                    "data_type": "string",
+                    "column_name": "ack_state",
+                    "column_order": 3,
+                    "example_values": [
+                        "active",
+                        "inactive"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_type",
+                    "data_type": "string",
+                    "column_name": "ack_type",
+                    "column_order": 4,
+                    "example_values": [
+                        "sticky",
+                        "unsticky"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_comment",
+                    "data_type": "string",
+                    "column_name": "ack_comment",
+                    "column_order": 5,
+                    "example_values": [
+                        "alert action auto-acknowledgement"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_expiration",
+                    "data_type": "string",
+                    "column_name": "ack_expiration",
+                    "column_order": 6,
+                    "example_values": [
+                        "1712917577.727753"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_expiration_datetime",
+                    "data_type": "string",
+                    "column_name": "ack_expiration_datetime",
+                    "column_order": 7,
+                    "example_values": [
+                        "12 Apr 2024 10:26"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_is_enabled",
+                    "data_type": "string",
+                    "column_name": "ack_is_enabled",
+                    "column_order": 8,
+                    "example_values": [
+                        "1"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_mtime",
+                    "data_type": "string",
+                    "column_name": "ack_mtime",
+                    "column_order": 9,
+                    "example_values": [
+                        "1712831177.7277536"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_mtime_datetime",
+                    "data_type": "string",
+                    "column_name": "ack_mtime_datetime",
+                    "column_order": 10,
+                    "example_values": [
+                        "11 Apr 2024 10:26"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "ack_manage",
+            "identifier": "ack_manage",
+            "description": "Manage Ack",
+            "verbose": "This action allows managing Acknowledgments for TrackMe entities, such as enabling, disabling or extending Acknowledgments.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "The tenant Identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id",
+                    "nameError": false
+                },
+                "object_category": {
+                    "description": "The object category (splk-dsm, splk-dhm, splk-mhm, splk-cim, splk-flx, splk-wlk)",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "object_category",
+                    "id": 2,
+                    "param_name": "object_category",
+                    "nameError": false
+                },
+                "object_list": {
+                    "description": "List of entities, in a comma separated format. If action=show and not set, will be defined to * to retrieve all Ack records, mandatory for action=enable/disable",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object_list",
+                    "id": 3,
+                    "param_name": "object_list",
+                    "nameError": false
+                },
+                "action": {
+                    "description": "The action to be performed, valid options are: enable | disable | show.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "action",
+                    "id": 4,
+                    "param_name": "action",
+                    "nameError": false
+                },
+                "ack_comment": {
+                    "description": "Relevant if action=enable but optional, the acknowlegment comment to be added to the records",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "ack_comment",
+                    "id": 5,
+                    "param_name": "ack_comment",
+                    "nameError": false
+                },
+                "ack_period": {
+                    "description": "Required if action=enable, the period for the acknowledgment in seconds",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 5,
+                    "name": "ack_period",
+                    "id": 6,
+                    "param_name": "ack_period",
+                    "nameError": false
+                },
+                "ack_type": {
+                    "description": "The type of Ack, valid options are sticky | unsticky, defaults to unsticky if not specified. Unsticky Ack are purged automatically when the entity goes back to a green state, while sticky Ack are purged only when the expiration is reached.",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 6,
+                    "name": "ack_type",
+                    "id": 7,
+                    "param_name": "ack_type",
+                    "nameError": false
+                },
+                "update_comment": {
+                    "description": "A comment for the update, comments are added to the audit record, if unset will be defined to: API update",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 7,
+                    "name": "update_comment",
+                    "id": 8,
+                    "param_name": "update_comment",
+                    "nameError": false
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object_category",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object_category",
+                    "column_order": 1,
+                    "example_values": [
+                        "splk-dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object_list",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object_list",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.action",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "action",
+                    "column_order": 3,
+                    "example_values": [
+                        "enable",
+                        "disable",
+                        "show"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.ack_comment",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "ack_comment",
+                    "column_order": 4,
+                    "example_values": [
+                        "alert action auto-acknowledgement"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.ack_period",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "ack_period",
+                    "column_order": 5,
+                    "example_values": [
+                        "86400"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.ack_type",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "ack_type",
+                    "column_order": 6,
+                    "example_values": [
+                        "sticky",
+                        "unsticky"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.update_comment",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "update_comment",
+                    "column_order": 7,
+                    "example_values": [
+                        "Update from SOAR Automation"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 8,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.process_count",
+                    "data_type": "numeric",
+                    "column_name": "process_count",
+                    "column_order": 9,
+                    "example_values": [
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.success_count",
+                    "data_type": "numeric",
+                    "column_name": "success_count",
+                    "column_order": 10,
+                    "example_values": [
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.failures_count",
+                    "data_type": "numeric",
+                    "column_name": "failures_count",
+                    "column_order": 11,
+                    "example_values": [
+                        0
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "maintenance_status",
+            "identifier": "maintenance_status",
+            "description": "Check and return the maintenance mode status",
+            "verbose": "This action allows retrieving the current TrackMe maintenance mode status.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {},
+            "output": [
+                {
+                    "data_path": "action_result.data.*.knowledge_record_id",
+                    "data_type": "string",
+                    "column_name": "knowledge_record_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "6617c6d6ce4b42ea1602a5b3"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance",
+                    "data_type": "string",
+                    "column_name": "maintenance",
+                    "column_order": 1,
+                    "example_values": [
+                        0,
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_comment",
+                    "data_type": "string",
+                    "column_name": "maintenance_comment",
+                    "column_order": 2,
+                    "example_values": [
+                        "Maintenance enabled for operation ref: xxxx"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_countdown",
+                    "data_type": "string",
+                    "column_name": "maintenance_countdown",
+                    "column_order": 3,
+                    "example_values": [
+                        86358
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_message",
+                    "data_type": "string",
+                    "column_name": "maintenance_message",
+                    "column_order": 4,
+                    "example_values": [
+                        "The global maintenance mode is currently enabled, alerts from TrackMe are not permitted"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode",
+                    "column_order": 5,
+                    "example_values": [
+                        "enabled",
+                        "disabled"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode_end",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode_end",
+                    "column_order": 6,
+                    "example_values": [
+                        1712920620
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode_start",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode_start",
+                    "column_order": 7,
+                    "example_values": [
+                        1712834220
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.src_user",
+                    "data_type": "string",
+                    "column_name": "src_user",
+                    "column_order": 8,
+                    "example_values": [
+                        "svc-trackme"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.time_started",
+                    "data_type": "string",
+                    "column_name": "time_started",
+                    "column_order": 9,
+                    "example_values": [
+                        "2024-04-11 12:17"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.time_updated",
+                    "data_type": "string",
+                    "column_name": "time_updated",
+                    "column_order": 10,
+                    "example_values": [
+                        "2024-04-11 12:32"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 11,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "maintenance_enable",
+            "identifier": "maintenance_enable",
+            "description": "Enable global TrackMe maintenance mode",
+            "verbose": "This action enables the TrackMe global maintenance mode.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "add_knowledge_record": {
+                    "description": "Boolean value to indicate if a knowledge record should be added to the knowledge database, defaults to true",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "add_knowledge_record",
+                    "id": 1,
+                    "param_name": "add_knowledge_record"
+                },
+                "maintenance_duration": {
+                    "description": "Duration of the maintenance window in seconds, if unspecified and maintenance_mode_end is not specified either, defaults to now plus 24 hours",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "maintenance_duration",
+                    "id": 2,
+                    "param_name": "maintenance_duration"
+                },
+                "maintenance_mode_end": {
+                    "description": "Date time in epochtime format for the end of the maintenance window, it is overriden by maintenance_duration if specified, defaults to now plus 24 hours if not specified and maintenance_duration is not specified",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "maintenance_mode_end",
+                    "id": 3,
+                    "param_name": "maintenance_mode_end"
+                },
+                "maintenance_mode_start": {
+                    "description": "Date time in epochtime format for the start of the maintennce window, defaults to now if not specified",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "maintenance_mode_start",
+                    "id": 4,
+                    "param_name": "maintenance_mode_start"
+                },
+                "time_format": {
+                    "description": "Time format when submitting start and end maintenance values, defaults to epochtime and can alternatively be set to datestring which expects YYYY-MM-DDTHH:MM as the input format",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "time_format",
+                    "id": 5,
+                    "param_name": "time_format"
+                },
+                "update_comment": {
+                    "description": "Comment for the update, comments are added to the audit record, if unset will be defined to: API update",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 5,
+                    "name": "update_comment",
+                    "id": 6,
+                    "param_name": "update_comment"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.knowledge_record_id",
+                    "data_type": "string",
+                    "column_name": "knowledge_record_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "6617c6d6ce4b42ea1602a5b3"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance",
+                    "data_type": "string",
+                    "column_name": "maintenance",
+                    "column_order": 1,
+                    "example_values": [
+                        0,
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_comment",
+                    "data_type": "string",
+                    "column_name": "maintenance_comment",
+                    "column_order": 2,
+                    "example_values": [
+                        "Maintenance enabled for operation ref: xxxx"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_countdown",
+                    "data_type": "string",
+                    "column_name": "maintenance_countdown",
+                    "column_order": 3,
+                    "example_values": [
+                        86358
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_message",
+                    "data_type": "string",
+                    "column_name": "maintenance_message",
+                    "column_order": 4,
+                    "example_values": [
+                        "The global maintenance mode is currently enabled, alerts from TrackMe are not permitted"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode",
+                    "column_order": 5,
+                    "example_values": [
+                        "enabled",
+                        "disabled"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode_end",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode_end",
+                    "column_order": 6,
+                    "example_values": [
+                        "TBC"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode_start",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode_start",
+                    "column_order": 7,
+                    "example_values": [
+                        1712920620
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.src_user",
+                    "data_type": "string",
+                    "column_name": "src_user",
+                    "column_order": 8,
+                    "example_values": [
+                        "svc-trackme"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.time_started",
+                    "data_type": "string",
+                    "column_name": "time_started",
+                    "column_order": 9,
+                    "example_values": [
+                        "2024-04-11 12:17"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.time_updated",
+                    "data_type": "string",
+                    "column_name": "time_updated",
+                    "column_order": 10,
+                    "example_values": [
+                        "2024-04-11 12:32"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 11,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "maintenance_disable",
+            "identifier": "maintenance_disable",
+            "description": "Disable global TrackMe maintenance mode",
+            "verbose": "This action disable the TrackMe global maintenance mode.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "update_comment": {
+                    "description": "Comment for the update, comments are added to the audit record, if unset will be defined to: API update",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "update_comment",
+                    "id": 1,
+                    "param_name": "update_comment"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.epoch_updated",
+                    "data_type": "string",
+                    "column_name": "epoch_updated",
+                    "column_order": 0,
+                    "example_values": [
+                        1712835165
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance",
+                    "data_type": "string",
+                    "column_name": "maintenance",
+                    "column_order": 1,
+                    "example_values": [
+                        0,
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_comment",
+                    "data_type": "string",
+                    "column_name": "maintenance_comment",
+                    "column_order": 2,
+                    "example_values": [
+                        "Maintenance enabled for operation ref: xxxx"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_message",
+                    "data_type": "string",
+                    "column_name": "maintenance_message",
+                    "column_order": 3,
+                    "example_values": [
+                        "The global maintenance mode is currently enabled, alerts from TrackMe are not permitted"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.maintenance_mode",
+                    "data_type": "string",
+                    "column_name": "maintenance_mode",
+                    "column_order": 4,
+                    "example_values": [
+                        "enabled",
+                        "disabled"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.src_user",
+                    "data_type": "string",
+                    "column_name": "src_user",
+                    "column_order": 5,
+                    "example_values": [
+                        "svc-trackme"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.time_updated",
+                    "data_type": "string",
+                    "column_name": "time_updated",
+                    "column_order": 6,
+                    "example_values": [
+                        "2024-04-11 12:37"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 7,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "tenants_ops_status",
+            "identifier": "tenants_ops_status",
+            "description": "Get TrackMe Tenants operation status",
+            "verbose": "This action retrieves the current operational status of the TrackMe tenants",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier, do not specify a tenant identifier to retrieve the status of all tenants.",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.tenant_id",
+                    "data_type": "string",
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.status",
+                    "data_type": "string",
+                    "column_name": "tenant_status",
+                    "column_order": 1,
+                    "example_values": [
+                        "OPERATIONAL",
+                        "DEGRADED"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.overall_ops_pct",
+                    "data_type": "string",
+                    "column_name": "overall_ops_pct",
+                    "column_order": 2,
+                    "example_values": [
+                        100
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.job_component_register",
+                    "data_type": "string",
+                    "column_name": "job_component_register",
+                    "column_order": 3,
+                    "example_values": [
+                        "JSON object with jobs operation details"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 4,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "remote_accounts_check_connectivity",
+            "identifier": "remote_accounts_check_connectivity",
+            "description": "Run a connectivity check for TrackMe remote accounts",
+            "verbose": "This action runs a connectivity check for TrackMe remote accounts which validates both network connectivity and authentication to the remote Splunk deployment.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "account": {
+                    "description": "TrackMe remote account name, do not specify any account to verify all configured accounts",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "account",
+                    "id": 1,
+                    "param_name": "my_remote"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.account",
+                    "data_type": "string",
+                    "column_name": "account",
+                    "column_order": 0,
+                    "example_values": [
+                        "my_remote"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.status",
+                    "data_type": "string",
+                    "column_name": "account_status",
+                    "column_order": 1,
+                    "example_values": [
+                        "success",
+                        "failure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.message",
+                    "data_type": "string",
+                    "column_name": "message",
+                    "column_order": 2,
+                    "example_values": [
+                        "remote search connectivity check was successful, service was established"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.host",
+                    "data_type": "string",
+                    "column_name": "host",
+                    "column_order": 3,
+                    "example_values": [
+                        "https://mysplunk.mydomain.com:8089"
+                    ]
+                },
+                {
+                    "data_path": "action_result.port",
+                    "data_type": "string",
+                    "column_name": "port",
+                    "column_order": 4,
+                    "example_values": [
+                        "8089"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },        
+        {
+            "action": "ml_outliers_train_models",
+            "identifier": "ml_outliers_train_models",
+            "description": "Requests Machine Learning models training for a given entity",
+            "verbose": "Programmatically train ML models for a given entity.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component"
+                },
+                "object": {
+                    "description": "TrackMe entity name.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object",
+                    "id": 3,
+                    "param_name": "object"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "ml_outliers_run_monitor",
+            "identifier": "ml_outliers_run_monitor",
+            "description": "Runs Machine Learning Outliers monitor process for a given entity",
+            "verbose": "This actions runs TrackMe Learning Outliers monitor for a given entity.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component"
+                },
+                "object": {
+                    "description": "TrackMe entity name.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object",
+                    "id": 3,
+                    "param_name": "object"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "ml_outliers_reset_models",
+            "identifier": "ml_outliers_reset_models",
+            "description": "Reset all ML outliers models for a given entity",
+            "verbose": "This actions resets ML models rules for a given entity.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id",
+                    "descriptionError": false
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component",
+                    "descriptionError": false
+                },
+                "object": {
+                    "description": "TrackMe entity name.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object",
+                    "id": 3,
+                    "param_name": "object",
+                    "descriptionError": false
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "ml_outliers_get_models",
+            "identifier": "ml_outliers_get_models",
+            "description": "Get ML Outliers models information for a given entity",
+            "verbose": "This action retrieves the key information for Machine Learning Outliers for a given entity.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id",
+                    "descriptionError": false
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component",
+                    "descriptionError": false
+                },
+                "object": {
+                    "description": "TrackMe entity name.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object",
+                    "id": 3,
+                    "param_name": "object",
+                    "descriptionError": false
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.alert_lower_breached",
+                    "data_type": "string",
+                    "column_name": "alert_lower_breached",
+                    "column_order": 4,
+                    "example_values": [
+                        "1"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.alert_upper_breached",
+                    "data_type": "string",
+                    "column_name": "alert_upper_breached",
+                    "column_order": 5,
+                    "example_values": [
+                        "0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.auto_correct",
+                    "data_type": "string",
+                    "column_name": "auto_correct",
+                    "column_order": 6,
+                    "example_values": [
+                        "1"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.confidence",
+                    "data_type": "string",
+                    "column_name": "confidence",
+                    "column_order": 7,
+                    "example_values": [
+                        "normal"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.confidence_reason",
+                    "data_type": "string",
+                    "column_name": "confidence_reason",
+                    "column_order": 8,
+                    "example_values": [
+                        "ML has sufficient historical metrics to proceed (metrics_duration=11+11:40:04, required=6days)"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.density_lowerthreshold",
+                    "data_type": "string",
+                    "column_name": "density_lowerthreshold",
+                    "column_order": 9,
+                    "example_values": [
+                        "0.005"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.density_upperthreshold",
+                    "data_type": "string",
+                    "column_name": "density_upperthreshold",
+                    "column_order": 10,
+                    "example_values": [
+                        "0.005"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.is_disabled",
+                    "data_type": "string",
+                    "column_name": "is_disabled",
+                    "column_order": 11,
+                    "example_values": [
+                        "0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.kpi_metric",
+                    "data_type": "string",
+                    "column_name": "kpi_metric",
+                    "column_order": 12,
+                    "example_values": [
+                        "splk.feeds.avg_eventcount_5m"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.kpi_span",
+                    "data_type": "string",
+                    "column_name": "kpi_span",
+                    "column_order": 13,
+                    "example_values": [
+                        "10m"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.last_exec",
+                    "data_type": "string",
+                    "column_name": "last_exec",
+                    "column_order": 14,
+                    "example_values": [
+                        "1712835612.3451912"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.method_calculation",
+                    "data_type": "string",
+                    "column_name": "method_calculation",
+                    "column_order": 15,
+                    "example_values": [
+                        "avg"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.min_value_for_lowerbound_breached",
+                    "data_type": "string",
+                    "column_name": "min_value_for_lowerbound_breached",
+                    "column_order": 16,
+                    "example_values": [
+                        "0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.min_value_for_upperbound_breached",
+                    "data_type": "string",
+                    "column_name": "min_value_for_upperbound_breached",
+                    "column_order": 17,
+                    "example_values": [
+                        "0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_filename",
+                    "data_type": "string",
+                    "column_name": "ml_model_filename",
+                    "column_order": 18,
+                    "example_values": [
+                        "__mlspl_model_249281506266661.mlmodel"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_filesize",
+                    "data_type": "string",
+                    "column_name": "ml_model_filesize",
+                    "column_order": 19,
+                    "example_values": [
+                        "81592"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_gen_search",
+                    "data_type": "string",
+                    "column_name": "ml_model_gen_search",
+                    "column_order": 20,
+                    "example_values": [
+                        "| mstats avg(trackme.splk.feeds.avg_eventcount_5m) as splk.feeds.avg_eventcount_5m where index=\"trackme_metrics\" tenant_id=\"secops\" object_category=\"splk-dsm\" object=\"org_eu_linux:linux_secure\" by object span=\"10m\" | eval factor=strftime(_time, \"%H\") | fit DensityFunction splk.feeds.avg_eventcount_5m lower_threshold=0.005 upper_threshold=0.005 into model_249281506266661 by factor | rex field=BoundaryRanges \"(-Infinity:(?<LowerBound>[\\d|\\.]*))|((?<UpperBound>[\\d|\\.]*):Infinity)\" | foreach LowerBound UpperBound [ eval <<FIELD>> = if(isnum('<<FIELD>>'), '<<FIELD>>', 0) ] | fields _time splk.feeds.avg_eventcount_5m LowerBound UpperBound | stats count as metrics_count"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_lookup_owner",
+                    "data_type": "string",
+                    "column_name": "ml_model_lookup_owner",
+                    "column_order": 21,
+                    "example_values": [
+                        "splunk-system-user"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_lookup_share",
+                    "data_type": "string",
+                    "column_name": "ml_model_lookup_share",
+                    "column_order": 22,
+                    "example_values": [
+                        "private"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_render_search",
+                    "data_type": "string",
+                    "column_name": "ml_model_render_search",
+                    "column_order": 23,
+                    "example_values": [
+                        "| mstats avg(trackme.splk.feeds.avg_eventcount_5m) as splk.feeds.avg_eventcount_5m where index=\"trackme_metrics\" tenant_id=\"secops\" object_category=\"splk-dsm\" object=\"org_eu_linux:linux_secure\" by object span=\"10m\" | eval factor=strftime(_time, \"%H\") | apply model_249281506266661 | rex field=BoundaryRanges \"(-Infinity:(?<LowerBound>[\\d|\\.]*))|((?<UpperBound>[\\d|\\.]*):Infinity)\" | foreach LowerBound UpperBound [ eval <<FIELD>> = if(isnum('<<FIELD>>'), '<<FIELD>>', 0) ] | fields _time splk.feeds.avg_eventcount_5m LowerBound UpperBound"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ml_model_summary_search",
+                    "data_type": "string",
+                    "column_name": "ml_model_summary_search",
+                    "column_order": 24,
+                    "example_values": [
+                        "| summary model_249281506266661"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.model_id",
+                    "data_type": "string",
+                    "column_name": "model_id",
+                    "column_order": 25,
+                    "example_values": [
+                        "model_249281506266661"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.perc_min_lowerbound_deviation",
+                    "data_type": "string",
+                    "column_name": "perc_min_lowerbound_deviation",
+                    "column_order": 26,
+                    "example_values": [
+                        "25.0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.perc_min_upperbound_deviation",
+                    "data_type": "string",
+                    "column_name": "perc_min_upperbound_deviation",
+                    "column_order": 27,
+                    "example_values": [
+                        "25.0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.period_calculation",
+                    "data_type": "string",
+                    "column_name": "period_calculation",
+                    "column_order": 28,
+                    "example_values": [
+                        "-30d"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.rules_access_search",
+                    "data_type": "string",
+                    "column_name": "rules_access_search",
+                    "column_order": 29,
+                    "example_values": [
+                        "| inputlookup trackme_dsm_outliers_entity_rules_tenant_secops where _key=\"9b7a2df12fec5174057fc63e74fefd39\""
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.time_factor",
+                    "data_type": "string",
+                    "column_name": "time_factor",
+                    "column_order": 30,
+                    "example_values": [
+                        "%H"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "ml_outliers_add_period_exclusion",
+            "identifier": "ml_outliers_add_period_exclusion",
+            "description": "Add an exclusion period to a given ML model",
+            "verbose": "This action adds a period of exclusion for a given Machine Learning model.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id"
+                },
+                "component": {
+                    "description": "The component value: dsm/dhm/wlk/flx/cim",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component"
+                },
+                "object": {
+                    "description": "The entity name",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object"
+                },
+                "model_id": {
+                    "description": "The Machine Learning model identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "model_id"
+                },
+                "earliest": {
+                    "description": "The earliest time to be excluded in epoch time format",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "earliest"
+                },
+                "latest": {
+                    "description": "The latest time to be excluded in epoch time format",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 5,
+                    "name": "latest"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.model_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "model_id",
+                    "column_order": 3,
+                    "example_values": [
+                        "model_249281506266661"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.earliest",
+                    "data_type": "numeric",
+                    "contains": [],
+                    "column_name": "earliest",
+                    "column_order": 4,
+                    "example_values": [
+                        "1712610968"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.latest",
+                    "data_type": "numeric",
+                    "contains": [],
+                    "column_name": "latest",
+                    "column_order": 5,
+                    "example_values": [
+                        "1712697368"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 6,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.results",
+                    "data_type": "numeric",
+                    "column_name": "results",
+                    "column_order": 7,
+                    "example_values": [
+                        "Exclusion period for ML model was successfully added"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.failures_count",
+                    "data_type": "numeric",
+                    "column_name": "failures_count",
+                    "column_order": 8,
+                    "example_values": [
+                        "0"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "component_get_entity",
+            "identifier": "component_get_entity",
+            "description": "Get TrackMe entities realtime data and status",
+            "verbose": "This action returns the realtime TrackMe knowledge for a given TrackMe entity.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id",
+                    "nameError": false
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component",
+                    "nameError": false
+                },
+                "filter_key": {
+                    "description": "Key identifier, multiple keys can be specified as a comma separated list of values. (you can use filter_object OR filter_key)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "filter_key",
+                    "id": 3,
+                    "param_name": "filter_key",
+                    "nameError": false
+                },
+                "filter_object": {
+                    "description": "Object identifier, multiple objects can be specified as a comma separated list of values. (you can use filter_object OR filter_key)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "filter_object",
+                    "id": 4,
+                    "param_name": "filter_object",
+                    "nameError": false
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object",
+                    "data_type": "string",
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.keyid",
+                    "data_type": "string",
+                    "column_name": "keyid",
+                    "column_order": 3,
+                    "example_values": [
+                        "9b7a2df12fec5174057fc63e74fefd39"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.anomaly_reason",
+                    "data_type": "string",
+                    "column_name": "anomaly_reason",
+                    "column_order": 4,
+                    "example_values": [
+                        "lag_threshold_breached",
+                        "delay_threshold_breached",
+                        "ml_outliers_detection",
+                        "data_sampling_anomaly",
+                        "future_over_tolerance",
+                        "out_of_monitoring_days",
+                        "out_of_monitoring_hours",
+                        "min_hosts_dcount",
+                        "in_logical_group",
+                        "status_not_met",
+                        "skipping_searches_detected",
+                        "execution_errors_detected",
+                        "orphan_search_detected",
+                        "execution_delayed",
+                        "compliance_failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.alias",
+                    "data_type": "string",
+                    "column_name": "alias",
+                    "column_order": 5,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.priority",
+                    "data_type": "string",
+                    "column_name": "priority",
+                    "column_order": 6,
+                    "example_values": [
+                        "low",
+                        "medium",
+                        "high"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.monitored_state",
+                    "data_type": "string",
+                    "column_name": "monitored_state",
+                    "column_order": 7,
+                    "example_values": [
+                        "enabled",
+                        "disabled"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_state",
+                    "data_type": "string",
+                    "column_name": "ack_state",
+                    "column_order": 8,
+                    "example_values": [
+                        "active"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.ack_type",
+                    "data_type": "string",
+                    "column_name": "ack_type",
+                    "column_order": 9,
+                    "example_values": [
+                        "sticky",
+                        "unsticky"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.isOutlier",
+                    "data_type": "numeric",
+                    "column_name": "isOutlier",
+                    "column_order": 10,
+                    "example_values": [
+                        0,
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.isOutlierReason",
+                    "data_type": "string",
+                    "column_name": "isOutlierReason",
+                    "column_order": 11,
+                    "example_values": [
+                        "\"Outliers ML for kpi=\"splk.flx.dcount_hosts\", model_id=\"model_205090884007035\", LowerBound=\"478.455\" breached with kpi_metric_value=\"257.975\" at time=\"2024-04-08 14:50:00.000 UTC\", pct_decrease=\"46.08\", Outliers ML for kpi=\"splk.flx.events_count\", model_id=\"model_136982422509193\", LowerBound=\"3697551.595\" breached with kpi_metric_value=\"1758610.25\" at time=\"2024-04-08 14:50:00.000 UTC\", pct_decrease=\"52.44\""
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.outliers_readiness",
+                    "data_type": "string",
+                    "column_name": "outliers_readiness",
+                    "column_order": 12,
+                    "example_values": [
+                        "True",
+                        "False"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.models_in_anomaly",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "models_in_anomaly",
+                    "column_order": 13,
+                    "example_values": [
+                        "model_205090884007035"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.isAnomaly",
+                    "data_type": "numeric",
+                    "column_name": "isAnomaly",
+                    "column_order": 14,
+                    "example_values": [
+                        0,
+                        1
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "component_manage_entity",
+            "identifier": "component_manage_entity",
+            "description": "This action allows managing TrackMe entities",
+            "verbose": "This action can be used to manage various aspects of TrackMe entities, such as enabling/disabling, deleting entities or maintaining components specific parameters using the extra_attributes JSON object.",
+            "type": "correct",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component"
+                },
+                "filter_object": {
+                    "description": "Object identifier, multiple objects can be specified as a comma separated list of values. (you can use filter_object OR filter_key)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "filter_object",
+                    "id": 3,
+                    "param_name": "filter_object"
+                },
+                "filter_key": {
+                    "description": "Keyid identifier, multiple keys can be specified as a comma separated list of values. (you can use filter_object OR filter_key)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "filter_key",
+                    "id": 4,
+                    "param_name": "filter_key"
+                },
+                "action": {
+                    "description": "The Action requested, valid options are: enable, disable, delete, manage_dsm_sampling, update_hours_ranges, update_wdays, update_priority, update_lag_policy, update_dcount_host, update_manual_tags",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "action",
+                    "id": 5,
+                    "param_name": "action"
+                },
+                "extra_attributes": {
+                    "description": "A JSON object containing attributes for the action. For example, the action update_lag_policy could be asssociated with the following extra_attributes: {\"data_max_delay_allowed\": 7200, \"data_max_lag_allowed\": 900}",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 5,
+                    "name": "extra_attributes",
+                    "id": 6,
+                    "param_name": "extra_attributes"
+                },
+                "update_comment": {
+                    "description": "Optional comment for audit purposes",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 6,
+                    "name": "update_comment",
+                    "id": 7,
+                    "param_name": "update_comment"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.filter_object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "filter_object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.filter_key",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "filter_key",
+                    "column_order": 3,
+                    "example_values": [
+                        "9b7a2df12fec5174057fc63e74fefd39"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.action",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "action",
+                    "column_order": 4,
+                    "example_values": [
+                        "update_priority"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.extra_attributes",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "extra_attributes",
+                    "column_order": 5,
+                    "example_values": [
+                        "{\"priority\": \"high\"}"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.parameter.update_comment",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "update_comment",
+                    "column_order": 6,
+                    "example_values": [
+                        "Update from SOAR Automation"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 7,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]                    
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "smart_status",
+            "identifier": "smart_status",
+            "description": "Runs the SmartStatus TrackMe action",
+            "verbose": "The SmartStatus TrackMe action performs automated investigations in Splunk depending on the current status of the entity, and returns the key information for the entity anomalies detected.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "component": {
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "component",
+                    "id": 2,
+                    "param_name": "component"
+                },
+                "object": {
+                    "description": "TrackMe entity name.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object",
+                    "id": 3,
+                    "param_name": "object"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.component",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "component",
+                    "column_order": 1,
+                    "example_values": [
+                        "dsm"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object",
+                    "column_order": 2,
+                    "example_values": [
+                        "org_eu_linux:linux_secure"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "logical_group_get_group_for_entity",
+            "identifier": "logical_group_get_group_for_entity",
+            "description": "Get TrackMe logical groups associations for a given TrackMe entity.",
+            "verbose": "This actions allows to retrieve and return the current associations information for a given TracKme entity.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "filter_object": {
+                    "description": "The TrackMe entity object identifier to search for and return Logical Groups association information.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "action",
+                    "id": 2,
+                    "param_name": "action"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.filter_object",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "filter_object",
+                    "column_order": 1,
+                    "example_values": [
+                        "key:host|linux-srv-eu1"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object_group_name",
+                    "data_type": "numeric",
+                    "column_name": "object_group_name",
+                    "column_order": 2,
+                    "example_values": [
+                        "grp-linux-eu-appxxx"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object_group_key",
+                    "data_type": "numeric",
+                    "column_name": "object_group_key",
+                    "column_order": 3,
+                    "example_values": [
+                        "661a678627481938da080cb2"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object_group_members",
+                    "data_type": "numeric",
+                    "column_name": "object_group_members",
+                    "column_order": 4,
+                    "example_values": [
+                        [
+                            "linux-srv-eu1",
+                            "linux-srv-eu2"
+                        ]
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object_group_mtime",
+                    "data_type": "numeric",
+                    "column_name": "object_group_mtime",
+                    "column_order": 5,
+                    "example_values": [
+                        "1713009380.1757667"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.object_group_mtime_human",
+                    "data_type": "numeric",
+                    "column_name": "object_group_mtime_human",
+                    "column_order": 6,
+                    "example_values": [
+                        "13 Apr 2024 11:56"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 7,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        },        
+        {
+            "action": "logical_group_manage",
+            "identifier": "logical_group_manage",
+            "description": "Manage TrackMe logical groups.",
+            "verbose": "This actions allows to manage TrackMe logical groups and perform association or unassociation of entities with Logical Groups.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "tenant_id": {
+                    "description": "Tenant identifier",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "tenant_id",
+                    "id": 1,
+                    "param_name": "tenant_id"
+                },
+                "action": {
+                    "description": "The action to be performed on the logical group, valid options: show / associate / unassociate.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "action",
+                    "id": 2,
+                    "param_name": "action"
+                },
+                "object_group_name": {
+                    "description": "Logical Group name, required for action associate / unassociate, if performing association the logical group will be created if it does not exist yet.",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "object_group_name",
+                    "id": 3,
+                    "param_name": "object_group_name"
+                },
+                "object_list": {
+                    "description": "Required for associate / unassociate, comma separated list of entities to be associated or unassociated with the Logical Group.",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "object_list",
+                    "id": 4,
+                    "param_name": "object_list"
+                },
+                "object_group_min_green_percent": {
+                    "description": "For action: associate only, minimal green percentage for this group (for action: associate), if not specified, defaults to 50.",
+                    "data_type": "numeric",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "object_group_min_green_percent",
+                    "id": 5,
+                    "param_name": "object_group_min_green_percent"
+                },
+                "update_comment": {
+                    "description": "A comment for the update, comments are added to the audit record, if unset will be defined to: API update",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 5,
+                    "name": "update_comment",
+                    "id": 6,
+                    "param_name": "update_comment",
+                    "nameError": false
+                }                
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "tenant_id",
+                    "column_order": 0,
+                    "example_values": [
+                        "mytenant"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.action",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "action",
+                    "column_order": 1,
+                    "example_values": [
+                        "associate"
+                    ]
+                },
+                {
+                    "data_path": "action_result.parameter.object_group_name",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object_group_name",
+                    "column_order": 1,
+                    "example_values": [
+                        "grp-linux-eu-appxxx"
+                    ]
+                },                
+                {
+                    "data_path": "action_result.parameter.object_list",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "object_list",
+                    "column_order": 2,
+                    "example_values": [
+                        "linux-srv-eu1,linux-srv-eu2"
+                    ]
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
+        }        
+    ],
+    "custom_made": true,
+    "directory": "trackme_dce19fec-9c3e-4bec-914e-8230ac80a417",
+    "version": 1,
+    "appname": "-",
+    "executable": "spawn3",
+    "disabled": false,
+    "copied_from_id": 217,
+    "copied_from_version": "2.4.0"
+}
