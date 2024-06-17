@@ -844,8 +844,8 @@ class TrackmeConnector(BaseConnector):
         component = param["component"]
         object_value = param["object"]
         model_id = param["model_id"]
-        earliest = param["earliest"]
-        latest = param["latest"]
+        earliest = param("earliest")
+        latest = param.get("latest")
 
         # body
         body = {
