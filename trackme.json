@@ -287,7 +287,7 @@
                     "nameError": false
                 },
                 "action": {
-                    "description": "The action to be performed, valid options are: enable | disable | show.",
+                    "description": "The action to be performed, valid options are: enable | disable | show",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -329,7 +329,7 @@
                     "nameError": false
                 },
                 "ack_type": {
-                    "description": "The type of Ack, valid options are sticky | unsticky, defaults to unsticky if not specified. Unsticky Ack are purged automatically when the entity goes back to a green state, while sticky Ack are purged only when the expiration is reached.",
+                    "description": "The type of Ack, valid options are sticky | unsticky, defaults to unsticky if not specified. Unsticky Ack are purged automatically when the entity goes back to a green state, while sticky Ack are purged only when the expiration is reached",
                     "data_type": "string",
                     "required": false,
                     "primary": false,
@@ -976,7 +976,7 @@
             "read_only": false,
             "parameters": {
                 "tenant_id": {
-                    "description": "Tenant identifier, do not specify a tenant identifier to retrieve the status of all tenants.",
+                    "description": "Tenant identifier, do not specify a tenant identifier to retrieve the status of all tenants",
                     "data_type": "string",
                     "required": false,
                     "primary": false,
@@ -1164,7 +1164,7 @@
                     "param_name": "tenant_id"
                 },
                 "component": {
-                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1177,7 +1177,7 @@
                     "param_name": "component"
                 },
                 "object": {
-                    "description": "TrackMe entity name.",
+                    "description": "TrackMe entity name",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1271,7 +1271,7 @@
                     "param_name": "tenant_id"
                 },
                 "component": {
-                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1284,7 +1284,7 @@
                     "param_name": "component"
                 },
                 "object": {
-                    "description": "TrackMe entity name.",
+                    "description": "TrackMe entity name",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1379,7 +1379,7 @@
                     "descriptionError": false
                 },
                 "component": {
-                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1393,7 +1393,7 @@
                     "descriptionError": false
                 },
                 "object": {
-                    "description": "TrackMe entity name.",
+                    "description": "TrackMe entity name",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1489,7 +1489,7 @@
                     "descriptionError": false
                 },
                 "component": {
-                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -1503,7 +1503,7 @@
                     "descriptionError": false
                 },
                 "object": {
-                    "description": "TrackMe entity name.",
+                    "description": "TrackMe entity name",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -2473,7 +2473,7 @@
                     "param_name": "tenant_id"
                 },
                 "component": {
-                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim.",
+                    "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -2486,7 +2486,7 @@
                     "param_name": "component"
                 },
                 "object": {
-                    "description": "TrackMe entity name.",
+                    "description": "TrackMe entity name",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -2561,7 +2561,7 @@
         {
             "action": "get associations information",
             "identifier": "logical_group_get_group_for_entity",
-            "description": "Get TrackMe logical groups associations for a given TrackMe entity.",
+            "description": "Get TrackMe logical groups associations for a given TrackMe entity",
             "verbose": "This actions allows to retrieve and return the current associations information for a given TracKme entity.",
             "type": "generic",
             "read_only": false,
@@ -2580,7 +2580,7 @@
                     "param_name": "tenant_id"
                 },
                 "filter_object": {
-                    "description": "The TrackMe entity object identifier to search for and return Logical Groups association information.",
+                    "description": "The TrackMe entity object identifier to search for and return Logical Groups association information",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -2693,7 +2693,7 @@
         {
             "action": "manage logical groups",
             "identifier": "logical_group_manage",
-            "description": "Manage TrackMe logical groups.",
+            "description": "Manage TrackMe logical groups",
             "verbose": "This actions allows to manage TrackMe logical groups and perform association or unassociation of entities with Logical Groups.",
             "type": "generic",
             "read_only": false,
@@ -2712,7 +2712,7 @@
                     "param_name": "tenant_id"
                 },
                 "action": {
-                    "description": "The action to be performed on the logical group, valid options: show / associate / unassociate.",
+                    "description": "The action to be performed on the logical group, valid options: show / associate / unassociate",
                     "data_type": "string",
                     "required": true,
                     "primary": false,
@@ -2725,7 +2725,7 @@
                     "param_name": "action"
                 },
                 "object_group_name": {
-                    "description": "Logical Group name, required for action associate / unassociate, if performing association the logical group will be created if it does not exist yet.",
+                    "description": "Logical Group name, required for action associate / unassociate, if performing association the logical group will be created if it does not exist yet",
                     "data_type": "string",
                     "required": false,
                     "primary": false,
@@ -2738,7 +2738,7 @@
                     "param_name": "object_group_name"
                 },
                 "object_list": {
-                    "description": "Required for associate / unassociate, comma separated list of entities to be associated or unassociated with the Logical Group.",
+                    "description": "Required for associate / unassociate, comma separated list of entities to be associated or unassociated with the Logical Group",
                     "data_type": "string",
                     "required": false,
                     "primary": false,
@@ -2751,7 +2751,7 @@
                     "param_name": "object_list"
                 },
                 "object_group_min_green_percent": {
-                    "description": "For action: associate only, minimal green percentage for this group (for action: associate), if not specified, defaults to 50.",
+                    "description": "For action: associate only, minimal green percentage for this group (for action: associate), if not specified, defaults to 50",
                     "data_type": "numeric",
                     "required": false,
                     "primary": false,
