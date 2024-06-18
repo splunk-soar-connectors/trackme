@@ -936,7 +936,7 @@ class TrackmeConnector(BaseConnector):
         self.save_progress("Get TrackMe entity realtime data successful")
         return action_result.set_status(phantom.APP_SUCCESS)
 
-    def _handle_component_manage_entity(self, param):
+    def _handle_component_manage_entity(self, param):  # noqa
         self.save_progress(
             "In action handler for: {0}".format(self.get_action_identifier())
         )
