@@ -1,7 +1,7 @@
 {
     "appid": "dce19fec-9c3e-4bec-914e-8230ac80a417",
     "name": "TrackMe",
-    "description": "This application provides powerful capabilities to interact with TrackMe for Splunk Enterprise & Splunk Cloud.",
+    "description": "This application provides powerful capabilities to interact with TrackMe for Splunk Enterprise & Splunk Cloud",
     "type": "siem",
     "product_vendor": "TrackMe Limited",
     "logo": "logo_trackme.svg",
@@ -51,7 +51,7 @@
             "action": "test connectivity",
             "identifier": "test_connectivity",
             "description": "Validate the asset configuration for connectivity using supplied configuration",
-            "verbose": "",
+            "verbose": "Validate the asset configuration for connectivity using the given configuration.",
             "type": "test",
             "read_only": true,
             "parameters": {},
@@ -971,7 +971,7 @@
             "action": "get tenants status",
             "identifier": "tenants_ops_status",
             "description": "Get TrackMe Tenants operation status",
-            "verbose": "This action retrieves the current operational status of the TrackMe tenants",
+            "verbose": "This action retrieves the current operational status of the TrackMe tenants.",
             "type": "generic",
             "read_only": false,
             "parameters": {
@@ -1056,7 +1056,7 @@
             "versions": "EQ(*)"
         },
         {
-            "action": "run check connectivity",
+            "action": "check connectivity",
             "identifier": "remote_accounts_check_connectivity",
             "description": "Run a connectivity check for TrackMe remote accounts",
             "verbose": "This action runs a connectivity check for TrackMe remote accounts which validates both network connectivity and authentication to the remote Splunk deployment.",
@@ -1122,6 +1122,16 @@
                     "column_order": 4,
                     "example_values": [
                         "8089"
+                    ]
+                },                
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 5,
+                    "example_values": [
+                        "success",
+                        "failed"
                     ]
                 },
                 {
@@ -2804,7 +2814,7 @@
                     "data_type": "string",
                     "contains": [],
                     "column_name": "object_group_name",
-                    "column_order": 1,
+                    "column_order": 2,
                     "example_values": [
                         "grp-linux-eu-appxxx"
                     ]
@@ -2814,7 +2824,7 @@
                     "data_type": "string",
                     "contains": [],
                     "column_name": "object_list",
-                    "column_order": 2,
+                    "column_order": 3,
                     "example_values": [
                         "linux-srv-eu1,linux-srv-eu2"
                     ]
@@ -2823,7 +2833,7 @@
                     "data_path": "action_result.status",
                     "data_type": "string",
                     "column_name": "status",
-                    "column_order": 3,
+                    "column_order": 4,
                     "example_values": [
                         "success",
                         "failed"
