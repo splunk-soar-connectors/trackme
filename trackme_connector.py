@@ -159,8 +159,6 @@ class TrackmeConnector(BaseConnector):
     ):
         # **kwargs can be any additional parameters that requests.request accepts
 
-        config = self.get_config()
-
         if headers is None:
             headers = self._headers
 
@@ -266,7 +264,7 @@ class TrackmeConnector(BaseConnector):
         # resp_data
         try:
             ack_response = response[0]
-        except Exception as e:
+        except Exception:
             ack_response = {
                 "ack_comment": "N/A",
                 "ack_expiration": "N/A",
@@ -348,9 +346,6 @@ class TrackmeConnector(BaseConnector):
 
         # resp_data
         self.debug_print(f"response: {response}")
-        process_count = response.get("process_count")
-        success_count = response.get("success_count")
-        failures_count = response.get("failures_count")
 
         summary["trackme_response"] = json.dumps(response)
         # self.debug_print(f'ack_response: {ack_response}')
@@ -976,7 +971,7 @@ class TrackmeConnector(BaseConnector):
         # try to parse extra_attributes from JSON string to an object
         try:
             extra_attributes = json.loads(extra_attributes)
-        except Exception as e:
+        except Exception:
             pass
 
         # define the target endpoint depending on the requested action
@@ -1048,7 +1043,7 @@ class TrackmeConnector(BaseConnector):
             if extra_attributes:
                 try:
                     deletion_type = extra_attributes["deletion_type"]
-                except Exception as e:
+                except Exception:
                     deletion_type = "temporary"
 
             # add to body
@@ -1086,7 +1081,7 @@ class TrackmeConnector(BaseConnector):
             else:
                 try:
                     sampling_action = extra_attributes["action"]
-                except Exception as e:
+                except Exception:
                     raise Exception(
                         "sampling action must be set in extra_attributes, valid actions are: enable|disable|reset|run|update_no_records"
                     )
@@ -1108,13 +1103,13 @@ class TrackmeConnector(BaseConnector):
 
                 # set endpoint
                 target_endpoint = (
-                    f"/services/trackme/v2/splk_dsm/write/ds_manage_data_sampling"
+                    "/services/trackme/v2/splk_dsm/write/ds_manage_data_sampling"
                 )
 
             elif sampling_action in ("update_no_records"):
 
                 # set endpoint
-                target_endpoint = f"/services/trackme/v2/splk_dsm/write/ds_update_data_sampling_records_nr"
+                target_endpoint = "/services/trackme/v2/splk_dsm/write/ds_update_data_sampling_records_nr"
 
                 # retrieve the number of records requested (data_sampling_nr)
                 try:
@@ -1127,7 +1122,7 @@ class TrackmeConnector(BaseConnector):
                     else:
                         body["data_sampling_nr"] = data_sampling_nr
 
-                except Exception as e:
+                except Exception:
                     raise Exception(
                         f"action={action} requires data_sampling_nr to be set in extra_attributes as an integer value."
                     )
@@ -1143,7 +1138,7 @@ class TrackmeConnector(BaseConnector):
             else:
                 try:
                     hours_ranges = extra_attributes["hours_ranges"]
-                except Exception as e:
+                except Exception:
                     raise Exception(
                         f"hours_ranges must be set in extra_attributes when action={action}"
                     )
@@ -1181,7 +1176,7 @@ class TrackmeConnector(BaseConnector):
             else:
                 try:
                     wdays = extra_attributes["wdays"]
-                except Exception as e:
+                except Exception:
                     raise Exception(
                         f"wdays must be set in extra_attributes when action={action}"
                     )
@@ -1233,7 +1228,7 @@ class TrackmeConnector(BaseConnector):
             else:
                 try:
                     priority = extra_attributes["priority"]
-                except Exception as e:
+                except Exception:
                     raise Exception(
                         f"priority must be set in extra_attributes when action={action}"
                     )
@@ -1377,7 +1372,9 @@ class TrackmeConnector(BaseConnector):
                 )
 
             # we expect:
-            # min_dcount_field: The dictinct count metric to be used for this entity, valid options are: avg_dcount_host_5m, latest_dcount_host_5m, perc95_dcount_host_5m, stdev_dcount_host_5m, global_dcount_host
+            # min_dcount_field: The dictinct count metric to be used for this entity,
+            # valid options are: avg_dcount_host_5m, latest_dcount_host_5m, perc95_dcount_host_5m,
+            # stdev_dcount_host_5m, global_dcount_host
             # min_dcount_host: minimal accepted number of distinct count hosts, must be an integer or the string any
 
             # get the min_dcount_host from extra_attributes
@@ -1390,7 +1387,7 @@ class TrackmeConnector(BaseConnector):
                         )
                 body["min_dcount_host"] = min_dcount_host
 
-            except Exception as e:
+            except Exception:
                 raise Exception(
                     f"min_dcount_host must be set in extra_attributes when action={action}"
                 )
@@ -1404,7 +1401,7 @@ class TrackmeConnector(BaseConnector):
                 else:
                     try:
                         min_dcount_field = extra_attributes["min_dcount_field"]
-                    except Exception as e:
+                    except Exception:
                         raise Exception(
                             f"min_dcount_field must be set in extra_attributes when action={action}"
                         )
@@ -1417,14 +1414,15 @@ class TrackmeConnector(BaseConnector):
                         "global_dcount_host",
                     ):
                         raise Exception(
-                            f"min_dcount_field must be avg_dcount_host_5m, latest_dcount_host_5m, perc95_dcount_host_5m, stdev_dcount_host_5m, or global_dcount_host, but got: {min_dcount_field}"
+                            "min_dcount_field must be avg_dcount_host_5m, latest_dcount_host_5m, "
+                            f"perc95_dcount_host_5m, stdev_dcount_host_5m, or global_dcount_host, but got: {min_dcount_field}"
                         )
 
                     body["min_dcount_field"] = min_dcount_field
 
             # set endpoint (this action is only for dsm)
             target_endpoint = (
-                f"/services/trackme/v2/splk_dsm/write/ds_update_min_dcount_host"
+                "/services/trackme/v2/splk_dsm/write/ds_update_min_dcount_host"
             )
 
         # update_manual_tags
@@ -1448,14 +1446,14 @@ class TrackmeConnector(BaseConnector):
                     )
                 body["tags_manual"] = tags_manual
 
-            except Exception as e:
+            except Exception:
                 raise Exception(
                     f"tags_manual must be set in extra_attributes when action={action}"
                 )
 
             # set endpoint (this action is only for dsm)
             target_endpoint = (
-                f"/services/trackme/v2/splk_dsm/write/ds_update_manual_tags"
+                "/services/trackme/v2/splk_dsm/write/ds_update_manual_tags"
             )
 
         # make rest call
