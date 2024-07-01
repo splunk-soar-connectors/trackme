@@ -1075,9 +1075,8 @@ class TrackmeConnector(BaseConnector):
 
             # get sampling action and details from extra_attributes
             if not extra_attributes:
-                raise Exception(
-                    f"When request action={action}, you must provide in extra_attributes the requested action: enable|disable|reset|run|update_no_records"
-                )
+                raise Exception(f"When request action={action}, you must provide in extra_attributes "
+                                "the requested action:enable|disable|reset|run|update_no_records")
             else:
                 try:
                     sampling_action = extra_attributes["action"]
