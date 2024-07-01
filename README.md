@@ -164,7 +164,7 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 -------- | -------- | ---- | -----------
 **splunk_url** |  required  | string | Splunk API URL
 **splunk_token** |  required  | password | Splunk bearer token
-**verify_ssl** |  required  | boolean | Verify Splunk API SSL certificate
+**verify_ssl** |  optional  | boolean | Verify Splunk API SSL certificate
 
 ### Supported Actions  
 [test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration  
@@ -175,7 +175,7 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 [disable maintenance mode](#action-disable-maintenance-mode) - Disable global TrackMe maintenance mode  
 [get tenants status](#action-get-tenants-status) - Get TrackMe Tenants operation status  
 [check connectivity](#action-check-connectivity) - Run a connectivity check for TrackMe remote accounts  
-[request outliers models](#action-request-outliers-models) - Requests Machine Learning models training for a given entity  
+[request outlier models](#action-request-outlier-models) - Requests Machine Learning models training for a given entity  
 [run outliers monitor](#action-run-outliers-monitor) - Runs Machine Learning Outliers monitor process for a given entity  
 [reset outliers models](#action-reset-outliers-models) - Reset all ML outliers models for a given entity  
 [get outliers models](#action-get-outliers-models) - Get ML Outliers models information for a given entity  
@@ -419,7 +419,7 @@ action_result.message | string |  |
 summary.total_objects | numeric |  |  
 summary.total_objects_successful | numeric |  |    
 
-## action: 'request outliers models'
+## action: 'request outlier models'
 Requests Machine Learning models training for a given entity
 
 Type: **generic**  
@@ -544,7 +544,7 @@ action_result.data.\*.model_id | string |  |   model_249281506266661
 action_result.data.\*.perc_min_lowerbound_deviation | string |  |   25.0 
 action_result.data.\*.perc_min_upperbound_deviation | string |  |   25.0 
 action_result.data.\*.period_calculation | string |  |   -30d 
-action_result.data.\*.rules_access_search | string |  |   | inputlookup trackme_dsm_outliers_entity_rules_tenant_secops where _key="9b7a2df12fec5174057fc63e74fefd39" [comment]: # pragma: allowlist secret
+action_result.data.\*.rules_access_search | string |  |   | inputlookup trackme_dsm_outliers_entity_rules_tenant_secops where _key="9b7a2df12fec5174057fc63e74fefd39" 
 action_result.data.\*.time_factor | string |  |   %H 
 action_result.message | string |  |  
 summary.total_objects | numeric |  |  
@@ -704,7 +704,7 @@ action_result.parameter.tenant_id | string |  |   mytenant
 action_result.parameter.filter_object | string |  |   key:host|linux-srv-eu1 
 action_result.data.\*.object_group_name | numeric |  |   grp-linux-eu-appxxx 
 action_result.data.\*.object_group_key | numeric |  |   661a678627481938da080cb2 
-action_result.data.\*.object_group_members | numeric |  |   ['linux-srv-eu1', 'linux-srv-eu2'] 
+action_result.data.\*.object_group_members | numeric |  |   linux-srv-eu1  linux-srv-eu2 
 action_result.data.\*.object_group_mtime | numeric |  |   1713009380.1757667 
 action_result.data.\*.object_group_mtime_human | numeric |  |   13 Apr 2024 11:56 
 action_result.status | string |  |   success  failed 
