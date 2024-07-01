@@ -1819,7 +1819,7 @@ class TrackmeConnector(BaseConnector):
 
         self._base_url = config.get("base_url")
         self._splunk_url = config.get("splunk_url")
-        self._verify_ssl = config.get("verify_ssl")
+        self._verify_ssl = config.get("verify_ssl", False)
         self._splunk_token = config.get("splunk_token")
         self._headers = {"Authorization": f"Bearer {self._splunk_token}"}
 
