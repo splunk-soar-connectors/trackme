@@ -580,7 +580,7 @@ action_result.data.\*.model_id | string |  |   model_249281506266661
 action_result.data.\*.perc_min_lowerbound_deviation | string |  |   25.0 
 action_result.data.\*.perc_min_upperbound_deviation | string |  |   25.0 
 action_result.data.\*.period_calculation | string |  |   -30d 
-action_result.data.\*.rules_access_search | string |  |   | inputlookup trackme_dsm_outliers_entity_rules_tenant_secops where _key="9b7a2df12fec5174057fc63e74fefd39" 
+action_result.data.\*.rules_access_search | string |  |   | inputlookup trackme_dsm_outliers_entity_rules_tenant_secops where _key="9b7a2df12fec5174057fc63e74fefd39" # pragma: allowlist secret
 action_result.data.\*.time_factor | string |  |   %H 
 action_result.message | string |  |  
 summary.total_objects | numeric |  |  
