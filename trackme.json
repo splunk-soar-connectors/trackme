@@ -63,7 +63,7 @@
             "description": "Get Ack status",
             "verbose": "This action allows retrieving the acknowledgement status for a given TrackMe entity.",
             "type": "investigate",
-            "read_only": false,
+            "read_only": true,
             "parameters": {
                 "tenant_id": {
                     "description": "Tenant identifier",
@@ -236,8 +236,7 @@
                     "order": 0,
                     "name": "tenant_id",
                     "id": 1,
-                    "param_name": "tenant_id",
-                    "nameError": false
+                    "param_name": "tenant_id"
                 },
                 "object_category": {
                     "description": "The object category (splk-dsm, splk-dhm, splk-mhm, splk-cim, splk-flx, splk-wlk)",
@@ -246,8 +245,7 @@
                     "order": 1,
                     "name": "object_category",
                     "id": 2,
-                    "param_name": "object_category",
-                    "nameError": false
+                    "param_name": "object_category"
                 },
                 "object_list": {
                     "description": "List of entities, in a comma separated format. If action=show and not set, will be defined to * to retrieve all Ack records, mandatory for action=enable/disable",
@@ -256,8 +254,7 @@
                     "order": 2,
                     "name": "object_list",
                     "id": 3,
-                    "param_name": "object_list",
-                    "nameError": false
+                    "param_name": "object_list"
                 },
                 "action": {
                     "description": "The action to be performed, valid options are: enable | disable | show",
@@ -266,8 +263,7 @@
                     "order": 3,
                     "name": "action",
                     "id": 4,
-                    "param_name": "action",
-                    "nameError": false
+                    "param_name": "action"
                 },
                 "ack_comment": {
                     "description": "Relevant if action=enable but optional, the acknowlegment comment to be added to the records",
@@ -275,8 +271,7 @@
                     "order": 4,
                     "name": "ack_comment",
                     "id": 5,
-                    "param_name": "ack_comment",
-                    "nameError": false
+                    "param_name": "ack_comment"
                 },
                 "ack_period": {
                     "description": "Required if action=enable, the period for the acknowledgment in seconds",
@@ -284,8 +279,7 @@
                     "order": 5,
                     "name": "ack_period",
                     "id": 6,
-                    "param_name": "ack_period",
-                    "nameError": false
+                    "param_name": "ack_period"
                 },
                 "ack_type": {
                     "description": "The type of Ack, valid options are sticky | unsticky, defaults to unsticky if not specified. Unsticky Ack are purged automatically when the entity goes back to a green state, while sticky Ack are purged only when the expiration is reached",
@@ -293,8 +287,7 @@
                     "order": 6,
                     "name": "ack_type",
                     "id": 7,
-                    "param_name": "ack_type",
-                    "nameError": false
+                    "param_name": "ack_type"
                 },
                 "update_comment": {
                     "description": "A comment for the update, comments are added to the audit record, if unset will be defined to: API update",
@@ -302,8 +295,7 @@
                     "order": 7,
                     "name": "update_comment",
                     "id": 8,
-                    "param_name": "update_comment",
-                    "nameError": false
+                    "param_name": "update_comment"
                 }
             },
             "output": [
@@ -1830,8 +1822,7 @@
                     "order": 0,
                     "name": "tenant_id",
                     "id": 1,
-                    "param_name": "tenant_id",
-                    "nameError": false
+                    "param_name": "tenant_id"
                 },
                 "component": {
                     "description": "TrackMe component, valid options are: flx, dsm, dhm, mhm, wlk, cim",
@@ -1840,8 +1831,7 @@
                     "order": 1,
                     "name": "component",
                     "id": 2,
-                    "param_name": "component",
-                    "nameError": false
+                    "param_name": "component"
                 },
                 "filter_key": {
                     "description": "Key identifier, multiple keys can be specified as a comma separated list of values. (you can use filter_object OR filter_key)",
@@ -1849,8 +1839,7 @@
                     "order": 2,
                     "name": "filter_key",
                     "id": 3,
-                    "param_name": "filter_key",
-                    "nameError": false
+                    "param_name": "filter_key"
                 },
                 "filter_object": {
                     "description": "Object identifier, multiple objects can be specified as a comma separated list of values. (you can use filter_object OR filter_key)",
@@ -1858,8 +1847,7 @@
                     "order": 3,
                     "name": "filter_object",
                     "id": 4,
-                    "param_name": "filter_object",
-                    "nameError": false
+                    "param_name": "filter_object"
                 }
             },
             "output": [
@@ -2473,8 +2461,7 @@
                     "order": 5,
                     "name": "update_comment",
                     "id": 6,
-                    "param_name": "update_comment",
-                    "nameError": false
+                    "param_name": "update_comment"
                 }
             },
             "output": [
