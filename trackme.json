@@ -11,7 +11,7 @@
     "product_version_regex": ".*",
     "publisher": "TrackMe Limited",
     "license": "Copyright (c) TrackMe Limited, 2024",
-    "app_version": "1.0.0",
+    "app_version": "1.0.1",
     "fips_compliant": false,
     "utctime_updated": "2024-04-12T06:57:35.836924Z",
     "package_name": "phantom_trackme",

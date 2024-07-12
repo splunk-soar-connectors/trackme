@@ -2,7 +2,7 @@
 # TrackMe
 
 Publisher: TrackMe Limited  
-Connector Version: 1.0.0  
+Connector Version: 1.0.1  
 Product Vendor: TrackMe Limited  
 Product Name: TrackMe  
 Product Version Supported (regex): ".\*"  
