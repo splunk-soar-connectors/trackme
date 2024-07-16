@@ -1,5 +1,5 @@
 [comment]: # "Auto-generated SOAR connector documentation"
-# TrackMe
+# TrackMe for Splunk SOAR
 
 Publisher: TrackMe Limited  
 Connector Version: 1.0.1  
