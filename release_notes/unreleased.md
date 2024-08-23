@@ -1,2 +1,1 @@
 **Unreleased**
-* Update app name to 'TrackMe for Splunk SOAR'

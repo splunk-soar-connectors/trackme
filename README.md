@@ -2,7 +2,7 @@
 # TrackMe for Splunk SOAR
 
 Publisher: TrackMe Limited  
-Connector Version: 1.0.2  
+Connector Version: 1.0.3  
 Product Vendor: TrackMe Limited  
 Product Name: TrackMe  
 Product Version Supported (regex): ".\*"  
