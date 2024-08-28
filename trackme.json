@@ -1,6 +1,7 @@
 {
     "appid": "dce19fec-9c3e-4bec-914e-8230ac80a417",
     "name": "TrackMe for Splunk SOAR",
+    "name": "TrackMe for Splunk SOAR",
     "description": "This application provides powerful capabilities to interact with TrackMe for Splunk Enterprise & Splunk Cloud",
     "type": "siem",
     "product_vendor": "TrackMe Limited",
