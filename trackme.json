@@ -10,7 +10,7 @@
     "python_version": "3",
     "product_version_regex": ".*",
     "publisher": "TrackMe Limited",
-    "license": "Copyright (c) TrackMe Limited, 2024",
+    "license": "Copyright (c) TrackMe Limited, 2024-2025",
     "app_version": "1.0.3",
     "fips_compliant": false,
     "utctime_updated": "2024-08-23T11:38:36.000000Z",
@@ -214,6 +214,10 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.object_list",
+                    "data_type": "string"
                 }
             ],
             "render": {
@@ -747,6 +751,30 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.add_knowledge_record",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.maintenance_duration",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.maintenance_mode_end",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.maintenance_mode_start",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.time_format",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.update_comment",
+                    "data_type": "string"
                 }
             ],
             "render": {
@@ -858,6 +886,10 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.update_comment",
+                    "data_type": "string"
                 }
             ],
             "render": {
@@ -941,6 +973,10 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.tenant_id",
+                    "data_type": "string"
                 }
             ],
             "render": {
@@ -1033,6 +1069,10 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.account",
+                    "data_type": "string"
                 }
             ],
             "render": {
@@ -2026,6 +2066,14 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.filter_key",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.filter_object",
+                    "data_type": "string"
                 }
             ],
             "render": {
@@ -2522,6 +2570,14 @@
                 {
                     "data_path": "summary.total_objects_successful",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.object_group_min_green_percent",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.update_comment",
+                    "data_type": "string"
                 }
             ],
             "render": {
