@@ -7,7 +7,7 @@
     "logo": "logo_trackme.svg",
     "logo_dark": "logo_trackme_dark.svg",
     "product_name": "TrackMe",
-    "python_version": "3",
+    "python_version": ["3.9", "3.13"],
     "product_version_regex": ".*",
     "publisher": "TrackMe Limited",
     "license": "Copyright (c) TrackMe Limited, 2024-2025",
