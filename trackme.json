@@ -10,7 +10,7 @@
     "python_version": "3",
     "product_version_regex": ".*",
     "publisher": "TrackMe Limited",
-    "license": "Copyright (c) TrackMe Limited, 2024-2025",
+    "license": "Copyright (c) TrackMe Limited, 2024-2026",
     "app_version": "1.0.3",
     "fips_compliant": false,
     "utctime_updated": "2024-08-23T11:38:36.000000Z",
@@ -2585,13 +2585,5 @@
             },
             "versions": "EQ(*)"
         }
-    ],
-    "custom_made": true,
-    "directory": "trackme_dce19fec-9c3e-4bec-914e-8230ac80a417",
-    "version": 1,
-    "appname": "-",
-    "executable": "spawn3",
-    "disabled": false,
-    "copied_from_id": 217,
-    "copied_from_version": "2.4.0"
+    ]
 }
