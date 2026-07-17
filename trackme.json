@@ -39,7 +39,7 @@
         "verify_ssl": {
             "description": "Verify Splunk API SSL certificate",
             "data_type": "boolean",
-            "default": false,
+            "default": true,
             "order": 2,
             "name": "verify_ssl",
             "id": 2
