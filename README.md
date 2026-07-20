@@ -1,9 +1,9 @@
 # TrackMe for Splunk SOAR
 
-Publisher: TrackMe Limited \
-Connector Version: 1.0.3 \
-Product Vendor: TrackMe Limited \
-Product Name: TrackMe \
+Publisher: TrackMe Limited <br>
+Connector Version: 1.0.3 <br>
+Product Vendor: TrackMe Limited <br>
+Product Name: TrackMe <br>
 Minimum Product Version: 6.0.2
 
 This application provides powerful capabilities to interact with TrackMe for Splunk Enterprise & Splunk Cloud
@@ -216,30 +216,30 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration \
-[get ack status](#action-get-ack-status) - Get Ack status \
-[manage ack](#action-manage-ack) - Manage Ack \
-[check maintenance status](#action-check-maintenance-status) - Check and return the maintenance mode status \
-[enable maintenance mode](#action-enable-maintenance-mode) - Enable global TrackMe maintenance mode \
-[disable maintenance mode](#action-disable-maintenance-mode) - Disable global TrackMe maintenance mode \
-[get tenants status](#action-get-tenants-status) - Get TrackMe Tenants operation status \
-[check connectivity](#action-check-connectivity) - Run a connectivity check for TrackMe remote accounts \
-[request outlier models](#action-request-outlier-models) - Requests Machine Learning models training for a given entity \
-[run outliers monitor](#action-run-outliers-monitor) - Runs Machine Learning Outliers monitor process for a given entity \
-[reset outliers models](#action-reset-outliers-models) - Reset all ML outliers models for a given entity \
-[get outliers models](#action-get-outliers-models) - Get ML Outliers models information for a given entity \
-[add exclusion period](#action-add-exclusion-period) - Add an exclusion period to a given ML model \
-[get entity data](#action-get-entity-data) - Get TrackMe entities realtime data and status \
-[manage entities](#action-manage-entities) - This action allows managing TrackMe entities \
-[run smart status](#action-run-smart-status) - Runs the SmartStatus TrackMe action \
-[get associations information](#action-get-associations-information) - Get TrackMe logical groups associations for a given TrackMe entity \
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration <br>
+[get ack status](#action-get-ack-status) - Get Ack status <br>
+[manage ack](#action-manage-ack) - Manage Ack <br>
+[check maintenance status](#action-check-maintenance-status) - Check and return the maintenance mode status <br>
+[enable maintenance mode](#action-enable-maintenance-mode) - Enable global TrackMe maintenance mode <br>
+[disable maintenance mode](#action-disable-maintenance-mode) - Disable global TrackMe maintenance mode <br>
+[get tenants status](#action-get-tenants-status) - Get TrackMe Tenants operation status <br>
+[check connectivity](#action-check-connectivity) - Run a connectivity check for TrackMe remote accounts <br>
+[request outlier models](#action-request-outlier-models) - Requests Machine Learning models training for a given entity <br>
+[run outliers monitor](#action-run-outliers-monitor) - Runs Machine Learning Outliers monitor process for a given entity <br>
+[reset outliers models](#action-reset-outliers-models) - Reset all ML outliers models for a given entity <br>
+[get outliers models](#action-get-outliers-models) - Get ML Outliers models information for a given entity <br>
+[add exclusion period](#action-add-exclusion-period) - Add an exclusion period to a given ML model <br>
+[get entity data](#action-get-entity-data) - Get TrackMe entities realtime data and status <br>
+[manage entities](#action-manage-entities) - This action allows managing TrackMe entities <br>
+[run smart status](#action-run-smart-status) - Runs the SmartStatus TrackMe action <br>
+[get associations information](#action-get-associations-information) - Get TrackMe logical groups associations for a given TrackMe entity <br>
 [manage logical groups](#action-manage-logical-groups) - Manage TrackMe logical groups
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity using supplied configuration
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 Validate the asset configuration for connectivity using the given configuration.
@@ -256,7 +256,7 @@ No Output
 
 Get Ack status
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 This action allows retrieving the acknowledgement status for a given TrackMe entity.
@@ -294,7 +294,7 @@ action_result.parameter.object_list | string | | |
 
 Manage Ack
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action allows managing Acknowledgments for TrackMe entities, such as enabling, disabling or extending Acknowledgments.
@@ -336,7 +336,7 @@ summary.total_objects_successful | numeric | | |
 
 Check and return the maintenance mode status
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action allows retrieving the current TrackMe maintenance mode status.
@@ -369,7 +369,7 @@ summary.total_objects_successful | numeric | | |
 
 Enable global TrackMe maintenance mode
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action enables the TrackMe global maintenance mode.
@@ -415,7 +415,7 @@ action_result.parameter.update_comment | string | | |
 
 Disable global TrackMe maintenance mode
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action disable the TrackMe global maintenance mode.
@@ -447,7 +447,7 @@ action_result.parameter.update_comment | string | | |
 
 Get TrackMe Tenants operation status
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action retrieves the current operational status of the TrackMe tenants.
@@ -476,7 +476,7 @@ action_result.parameter.tenant_id | string | | |
 
 Run a connectivity check for TrackMe remote accounts
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action runs a connectivity check for TrackMe remote accounts which validates both network connectivity and authentication to the remote Splunk deployment.
@@ -506,7 +506,7 @@ action_result.parameter.account | string | | |
 
 Requests Machine Learning models training for a given entity
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 Programmatically train ML models for a given entity.
@@ -535,7 +535,7 @@ summary.total_objects_successful | numeric | | |
 
 Runs Machine Learning Outliers monitor process for a given entity
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This actions runs TrackMe Learning Outliers monitor for a given entity.
@@ -564,7 +564,7 @@ summary.total_objects_successful | numeric | | |
 
 Reset all ML outliers models for a given entity
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This actions resets ML models rules for a given entity.
@@ -593,7 +593,7 @@ summary.total_objects_successful | numeric | | |
 
 Get ML Outliers models information for a given entity
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action retrieves the key information for Machine Learning Outliers for a given entity.
@@ -649,7 +649,7 @@ summary.total_objects_successful | numeric | | |
 
 Add an exclusion period to a given ML model
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action adds a period of exclusion for a given Machine Learning model.
@@ -686,7 +686,7 @@ summary.total_objects_successful | numeric | | |
 
 Get TrackMe entities realtime data and status
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action returns the realtime TrackMe knowledge for a given TrackMe entity.
@@ -730,7 +730,7 @@ action_result.parameter.filter_object | string | | |
 
 This action allows managing TrackMe entities
 
-Type: **correct** \
+Type: **correct** <br>
 Read only: **False**
 
 This action can be used to manage various aspects of TrackMe entities, such as enabling/disabling, deleting entities or maintaining components specific parameters using the extra_attributes JSON object.
@@ -767,7 +767,7 @@ summary.total_objects_successful | numeric | | |
 
 Runs the SmartStatus TrackMe action
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 The SmartStatus TrackMe action performs automated investigations in Splunk depending on the current status of the entity, and returns the key information for the entity anomalies detected.
@@ -796,7 +796,7 @@ summary.total_objects_successful | numeric | | |
 
 Get TrackMe logical groups associations for a given TrackMe entity
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This actions allows to retrieve and return the current associations information for a given TracKme entity.
@@ -828,7 +828,7 @@ summary.total_objects_successful | numeric | | |
 
 Manage TrackMe logical groups
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This actions allows to manage TrackMe logical groups and perform association or unassociation of entities with Logical Groups.
@@ -863,7 +863,7 @@ ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

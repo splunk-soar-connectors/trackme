@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # File: trackme_connector.py
 #
-# Copyright (c) TrackMe Limited, 2024-2025
+# Copyright (c) TrackMe Limited, 2024-2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1628,7 +1628,7 @@ class TrackmeConnector(BaseConnector):
 
         self._base_url = config.get("base_url")
         self._splunk_url = config.get("splunk_url")
-        self._verify_ssl = config.get("verify_ssl", False)
+        self._verify_ssl = config.get("verify_ssl", True)
         self._splunk_token = config.get("splunk_token")
         self._headers = {"Authorization": f"Bearer {self._splunk_token}"}
 
