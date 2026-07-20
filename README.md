@@ -1,7 +1,7 @@
 # TrackMe for Splunk SOAR
 
 Publisher: TrackMe Limited <br>
-Connector Version: 1.0.3 <br>
+Connector Version: 2.0.0 <br>
 Product Vendor: TrackMe Limited <br>
 Product Name: TrackMe <br>
 Minimum Product Version: 6.0.2
